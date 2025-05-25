@@ -1,0 +1,83 @@
+AWSTemplateFormatVersion: "2010-09-09"  # Template format version
+
+Description: >
+  Deploy a Windows Server 2022 EC2 instance with IIS and a sample webpage.
+  Works seamlessly in us-east-1 and us-east-2 AWS regions.
+
+Parameters:
+  KeyName:  # EC2 Key Pair name for RDP access
+    Type: String
+    Description: Name of an existing EC2 KeyPair to enable RDP access
+
+  InstanceType:  # Instance type selection
+    Type: String
+    Default: t3.medium            # Changed default to Nitro-based instance type for UEFI support
+    AllowedValues:
+      - t3.medium
+      - t3.large
+      - t3a.medium
+    Description: Choose EC2 instance type that supports UEFI (Nitro instances)
+
+  MyVPC:  # VPC selection
+    Type: AWS::EC2::VPC::Id
+    Description: Select an existing VPC
+
+  MySubnet:  # Subnet selection
+    Type: AWS::EC2::Subnet::Id
+    Description: Select a subnet in the chosen VPC
+
+Mappings:
+  RegionMap:  # Mapping AMIs to regions (Windows Server 2022 AMIs)
+    us-east-1:
+      AMI: ami-0fa71268a899c2733  # Windows Server 2022 for N. Virginia (us-east-1)
+    us-east-2:
+      AMI: ami-070f90bab72874c6f  # Windows Server 2022 for Ohio (us-east-2)
+
+Resources:
+  MySecurityGroup:  # Security group allowing RDP and HTTP
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow RDP and HTTP traffic
+      VpcId: !Ref MyVPC  # Attach to selected VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3389  # RDP port
+          ToPort: 3389
+          CidrIp: 0.0.0.0/0  # Allow from anywhere (for testing only; restrict in production)
+        - IpProtocol: tcp
+          FromPort: 80     # HTTP port
+          ToPort: 80
+          CidrIp: 0.0.0.0/0  # Allow from anywhere
+
+  MyEC2Instance:  # EC2 instance definition
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType  # Use instance type from parameter
+      KeyName: !Ref KeyName            # Key pair for RDP access
+      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", AMI]  # Use region-specific Windows AMI
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: true  # Auto-assign public IP to instance
+          DeviceIndex: 0
+          SubnetId: !Ref MySubnet           # Attach instance to selected subnet
+          GroupSet:
+            - !Ref MySecurityGroup         # Attach security group to instance
+      UserData:  # PowerShell script to install IIS and create a sample webpage
+        Fn::Base64: !Sub |
+          <powershell>
+          Install-WindowsFeature -Name Web-Server -IncludeManagementTools  # Install IIS Web Server
+          $html = @"
+          <html>
+            <head><title>Deployed via CloudFormation</title></head>
+            <body style='background-color:#f0f0f0;text-align:center;font-family:sans-serif;'>
+              <h1 style='color:blue;'>Hello from Windows Server 2022!</h1>
+              <p>This sample page is hosted using IIS installed by a CloudFormation script.</p>
+            </body>
+          </html>
+          "@
+          Set-Content -Path "C:\inetpub\wwwroot\index.html" -Value $html  # Write sample HTML to IIS root
+          </powershell>
+
+Outputs:
+  WebsiteURL:  # Output the public URL for accessing the IIS webpage
+    Description: Public DNS of the Windows Web Server
+    Value: !Sub "http://${MyEC2Instance.PublicDnsName}"
