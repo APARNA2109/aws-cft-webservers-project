@@ -25,7 +25,7 @@ While launching the CloudFormation stack, parameters like InstanceType, KeyName,
 
 ### Screenshot:
 <div>
-  <img src="screenshots/region1-parameters.png" alt="Parameters Filled - Region 1" width="600" />
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day1-Linux/screenshots/parametersfilled%20(region%201).png" alt="Parameters Filled - Region 1" width="600" />
 </div>
 
 ---
@@ -37,7 +37,7 @@ The EC2 instance created by the stack is now in the running state.
 
 ### Screenshot:
 <div>
-  <img src="screenshots/region1-ec2-running.png" alt="EC2 Instance - Region 1" width="600" />
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day1-Linux/screenshots/ec2%20running(region%201).png" alt="EC2 Instance - Region 1" width="600" />
 </div>
 
 ---
@@ -49,7 +49,7 @@ The Apache web server shows a welcome page when accessed through the public IP o
 
 ### Screenshot:
 <div>
-  <img src="screenshots/region1-apache-browser.png" alt="Browser Output - Region 1" width="600" />
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day1-Linux/screenshots/web%20server%20(region1).png" alt="Browser Output - Region 1" width="600" />
 </div>
 
 ---
@@ -61,7 +61,7 @@ We repeated the process in Region 2 (e.g., Ohio) to test cross-region setup.
 
 ### Screenshot:
 <div>
-  <img src="screenshots/region2-stack-creation.png" alt="CloudFormation Stack - Region 2" width="600" />
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day1-Linux/screenshots/Stack%20creation%20of%20linuxserver(Region2).png" alt="CloudFormation Stack - Region 2" width="600" />
 </div>
 
 ---
@@ -73,7 +73,7 @@ Entered the same parameters used for Region 1.
 
 ### Screenshot:
 <div>
-  <img src="screenshots/region2-parameters.png" alt="Parameters Filled - Region 2" width="600" />
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day1-Linux/screenshots/parametersfilled%20(region%202).png" alt="Parameters Filled - Region 2" width="600" />
 </div>
 
 ---
@@ -85,7 +85,7 @@ The EC2 instance in Region 2 is up and running.
 
 ### Screenshot:
 <div>
-  <img src="screenshots/region2-ec2-running.png" alt="EC2 Instance - Region 2" width="600" />
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day1-Linux/screenshots/ec2%20running(region%202).png" alt="EC2 Instance - Region 2" width="600" />
 </div>
 
 ---
@@ -97,7 +97,7 @@ Verified the public IP and DNS from Region 2 also display the Apache welcome pag
 
 ### Screenshot:
 <div>
-  <img src="screenshots/region2-apache-browser.png" alt="Browser Output - Region 2" width="600" />
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day1-Linux/screenshots/web%20server%20(region2).png" alt="Browser Output - Region 2" width="600" />
 </div>
 
 ---
