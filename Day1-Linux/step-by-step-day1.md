@@ -13,7 +13,7 @@ We initiated a CloudFormation stack in Region 1 (e.g., N. Virginia). The stack i
 
 ### Screenshot:
 <div>
-  <img src="screenshots/region1-stack-creation.png" alt="CloudFormation Stack - Region 1" width="600" />
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day1-Linux/screenshots/Stack%20creation%20of%20linuxserver(Region1).png" alt="CloudFormation Stack - Region 1" width="600" />
 </div>
 
 ---
