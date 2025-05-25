@@ -1,0 +1,93 @@
+AWSTemplateFormatVersion: '2010-09-09'  # CloudFormation template version
+
+Description: >
+  Deploy a Linux EC2 instance with Apache HTTP server installed,
+  using a user data script. Supports multiple AWS regions with AMI mapping.
+
+Parameters:
+  OSType:
+    Type: String
+    AllowedValues:
+      - Linux
+    Default: Linux
+    Description: Operating System type to deploy (Only Linux supported now)
+
+  KeyPairName:
+    Type: AWS::EC2::KeyPair::KeyName     # Parameter expects an existing EC2 KeyPair name in the region
+    Description: Name of the EC2 KeyPair to enable SSH access
+
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+      - t2.small
+      - t3.micro
+      - t3.small
+    Description: EC2 instance type to launch
+
+Mappings:
+  RegionMap:                        # Maps AWS region to its Amazon Linux 2 AMI ID
+    us-east-1:
+      AMI: ami-0953476d60561c955    # Amazon Linux 2 AMI ID for us-east-1
+    us-east-2:
+      AMI: ami-06c8f2ec674c67112    # Amazon Linux 2 AMI ID for us-east-2
+    # Add more regions and AMI IDs as needed
+
+Conditions:
+  IsLinux: !Equals [ !Ref OSType, "Linux" ]  # Condition to check if OSType is Linux
+
+Resources:
+  LinuxInstance:
+    Type: AWS::EC2::Instance          # Defines an EC2 instance resource
+    Condition: IsLinux                # Create this resource only if OSType == Linux
+    Properties:
+      InstanceType: !Ref InstanceType   # Uses the instance type from parameter
+      KeyName: !Ref KeyPairName          # Uses the KeyPairName for SSH access
+      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", AMI]  # Selects AMI ID based on current region
+      SecurityGroups:                    # Attaches security group allowing SSH and HTTP
+        - !Ref InstanceSecurityGroup
+      UserData:                         # User data script to install Apache and create simple webpage
+        Fn::Base64: !Sub |              # Base64 encode the multi-line bash script
+          #!/bin/bash
+          yum update -y
+          yum install -y httpd
+          systemctl start httpd
+          systemctl enable httpd
+          echo "<!DOCTYPE html>
+          <html>
+          <head>
+            <title>My Web Server</title>
+          </head>
+          <body>
+            <h1>Welcome to Apache on EC2</h1>
+            <p>This instance was launched using AWS CloudFormation.</p>
+          </body>
+          </html>" > /var/www/html/index.html
+
+  InstanceSecurityGroup:
+    Type: AWS::EC2::SecurityGroup      # Defines security group allowing inbound SSH and HTTP access
+    Properties:
+      GroupDescription: Enable SSH and HTTP access
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22                 # SSH port number
+          ToPort: 22
+          CidrIp: 0.0.0.0/0           # Allows SSH from any IP (adjust for security)
+        - IpProtocol: tcp
+          FromPort: 80                 # HTTP port number
+          ToPort: 80
+          CidrIp: 0.0.0.0/0           # Allows HTTP from any IP
+
+Outputs:
+  InstanceId:
+    Description: EC2 instance ID
+    Value: !Ref LinuxInstance          # Output EC2 instance ID
+
+  PublicIP:
+    Description: Public IP address of the EC2 instance
+    Value: !GetAtt LinuxInstance.PublicIp   # Output the public IP
+
+  WebURL:
+    Description: URL to access Apache web server
+    Value: !Sub http://${LinuxInstance.PublicDnsName}   # Output the web URL using the instance public DNS
