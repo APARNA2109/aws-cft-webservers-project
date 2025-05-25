@@ -30,10 +30,16 @@ Provided essential parameters like `InstanceType`, `KeyName`, `VPC`, and `Subnet
 
 ---
 
-## ⚙️ Step 3: PowerShell Execution via UserData – Region 1
+
+## 🖥️ Step 3: EC2 Instance Running – Region 1
 
 ### Description:
-Used PowerShell in the `UserData` section to install IIS and serve the default web page automatically on instance launch.
+The EC2 instance launched from the CloudFormation stack is successfully running.
+
+### Screenshot:
+<div align="center">
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day2-Windows/screenshots/ec2%20running%20(r1).png" alt="EC2 Running - Region 1" width="600" />
+</div>
 
 ---
 
@@ -73,10 +79,16 @@ Same parameters were filled while launching the stack in Region 2.
 
 ---
 
-## ⚙️ Step 7: PowerShell Execution via UserData – Region 2
+
+## 🖥️ Step 3: EC2 Instance Running – Region 2
 
 ### Description:
-IIS installation was handled in Region 2 using PowerShell inside the CloudFormation UserData script.
+The EC2 instance launched from the CloudFormation stack is successfully running.
+
+### Screenshot:
+<div align="center">
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day2-Windows/screenshots/ec2%20running%20(r2).png" alt="EC2 Running - Region 2" width="600" />
+</div>
 
 ---
 
