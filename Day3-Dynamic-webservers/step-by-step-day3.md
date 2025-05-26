@@ -28,7 +28,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ## 📈 Architecture Flow Chart
 
 <p align="center">
-  <img src="images/architecture-diagram.png" alt="Architecture Diagram" width="600"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/Flowchart.png" alt="Architecture Diagram" width="600"/>
 </p>
 
 ---
@@ -38,7 +38,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ### 1. AWS Homepage
 
 <p align="center">
-  <img src="images/aws-home.png" alt="AWS Homepage" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/home%20page.png" alt="AWS Homepage" width="700"/>
 </p>
 
 ---
@@ -46,7 +46,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ### 2. Login Page
 
 <p align="center">
-  <img src="images/aws-login.png" alt="AWS Login" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/login%20page.png" alt="AWS Login" width="700"/>
 </p>
 
 ---
@@ -54,7 +54,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ### 3. AWS Console
 
 <p align="center">
-  <img src="images/aws-console.png" alt="AWS Console" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/console%20home%20page.png" alt="AWS Console" width="700"/>
 </p>
 
 ---
@@ -64,7 +64,13 @@ To build a single AWS CloudFormation Template (CFT) that:
 - Use: `Day3-Dynamic-webservers.yaml`
 
 <p align="center">
-  <img src="images/template-upload.png" alt="CFT Upload" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/template%201.png" alt="CFT Upload" width="700"/>
+</p>
+<p align="center">
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/template2.png" alt="CFT Upload" width="700"/>
+</p>
+<p align="center">
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/template%203.png" alt="CFT Upload" width="700"/>
 </p>
 
 ---
