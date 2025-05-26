@@ -1,0 +1,144 @@
+AWSTemplateFormatVersion: "2010-09-09"  # Specifies the CloudFormation template version
+
+Description: >
+  CloudFormation template to deploy EC2 instances with Windows and/or Linux OS based on user input.
+  Allows separate instance type selection for each OS to ensure AMI compatibility.
+
+Parameters:
+  OSType:
+    Type: String
+    Default: Both
+    AllowedValues:
+      - Windows
+      - Linux
+      - Both
+    Description: Choose the OS type to deploy (Linux, Windows, or Both).
+
+  KeyName:
+    Type: AWS::EC2::KeyPair::KeyName
+    Description: Enter the existing EC2 KeyPair name to enable SSH or RDP access.
+
+  LinuxInstanceType:
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t2.micro
+      - t2.small
+      - t3.micro
+    Description: Select EC2 instance type for Linux.
+
+  WindowsInstanceType:
+    Type: String
+    Default: t3.medium
+    AllowedValues:
+      - t3.micro
+      - t3.small
+      - t3.medium
+    Description: Select EC2 instance type for Windows (t2 not supported with UEFI-based Windows AMIs).
+
+  MyVPC:
+    Type: AWS::EC2::VPC::Id
+    Description: Choose an existing VPC for your instances.
+
+  MySubnet:
+    Type: AWS::EC2::Subnet::Id
+    Description: Choose a subnet in the selected VPC.
+
+Mappings:
+  RegionMap:
+    us-east-1:
+      LinuxAMI: ami-0953476d60561c955     # Amazon Linux 2 AMI for N. Virginia
+      WindowsAMI: ami-0fa71268a899c2733   # Windows Server 2022 for N. Virginia
+    us-east-2:
+      LinuxAMI: ami-06c8f2ec674c67112     # Amazon Linux 2 AMI for Ohio
+      WindowsAMI: ami-070f90bab72874c6f   # Windows Server 2022 for Ohio
+
+Conditions:
+  CreateLinux: !Or [!Equals [!Ref OSType, Linux], !Equals [!Ref OSType, Both]]
+  CreateWindows: !Or [!Equals [!Ref OSType, Windows], !Equals [!Ref OSType, Both]]
+
+Resources:
+  WebSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable HTTP, HTTPS, SSH, and RDP access
+      VpcId: !Ref MyVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 3389
+          ToPort: 3389
+          CidrIp: 0.0.0.0/0
+
+  LinuxInstance:
+    Type: AWS::EC2::Instance
+    Condition: CreateLinux
+    Properties:
+      InstanceType: !Ref LinuxInstanceType
+      KeyName: !Ref KeyName
+      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", LinuxAMI]
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: true
+          DeviceIndex: 0
+          SubnetId: !Ref MySubnet
+          GroupSet:
+            - !Ref WebSecurityGroup
+      Tags:
+        - Key: OS
+          Value: Linux
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          yum update -y
+          yum install -y httpd
+          systemctl enable httpd
+          systemctl start httpd
+          echo "<html><h1>Hello from Linux EC2!</h1><p>Deployed via CloudFormation</p></html>" > /var/www/html/index.html
+
+  WindowsInstance:
+    Type: AWS::EC2::Instance
+    Condition: CreateWindows
+    Properties:
+      InstanceType: !Ref WindowsInstanceType
+      KeyName: !Ref KeyName
+      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", WindowsAMI]
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: true
+          DeviceIndex: 0
+          SubnetId: !Ref MySubnet
+          GroupSet:
+            - !Ref WebSecurityGroup
+      Tags:
+        - Key: OS
+          Value: Windows
+      UserData:
+        Fn::Base64: !Sub |
+          <powershell>
+          Install-WindowsFeature -Name Web-Server -IncludeManagementTools
+          $html = @"
+          <html><h1>Hello from Windows Server 2022!</h1><p>Deployed via CloudFormation</p></html>
+          "@
+          Set-Content -Path "C:\inetpub\wwwroot\index.html" -Value $html
+          </powershell>
+
+Outputs:
+  LinuxPublicDNS:
+    Condition: CreateLinux
+    Description: Public DNS of Linux EC2 instance
+    Value: !GetAtt LinuxInstance.PublicDnsName
+
+  WindowsPublicDNS:
+    Condition: CreateWindows
+    Description: Public DNS of Windows EC2 instance
+    Value: !GetAtt WindowsInstance.PublicDnsName
