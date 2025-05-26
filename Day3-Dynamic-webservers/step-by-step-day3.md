@@ -88,14 +88,14 @@ To build a single AWS CloudFormation Template (CFT) that:
 - Select `.pem` format
 - Save securely
 
-*(No screenshot needed)*
+
 
 ---
 
 ### 7. Search for CloudFormation
 
 <p align="center">
-  <img src="images/cloudformation-search.png" alt="CloudFormation Search" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/CFT%20SEARCH%20PAGE.png" alt="CloudFormation Search" width="700"/>
 </p>
 
 ---
@@ -103,7 +103,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ### 8. Open CloudFormation Console
 
 <p align="center">
-  <img src="images/cloudformation-console.png" alt="CloudFormation Console" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/CFT%20CONSOLE.png" alt="CloudFormation Console" width="700"/>
 </p>
 
 ---
@@ -111,7 +111,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ### 9. Stack Creation (Where to Click)
 
 <p align="center">
-  <img src="images/create-stack-start.png" alt="Create Stack" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/CREATION%20OF%20STACK.png" alt="Create Stack" width="700"/>
 </p>
 
 ---
@@ -119,7 +119,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ### 10. Create Stack from Template
 
 <p align="center">
-  <img src="images/create-stack-template.png" alt="Upload Template" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/CREATE%20STACK.png" alt="Upload Template" width="700"/>
 </p>
 
 ---
@@ -127,7 +127,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ### 11. Specify Stack Details
 
 <p align="center">
-  <img src="images/stack-details.png" alt="Stack Details" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/SPECIFY%20THE%20STACK%20DETAIL.png" alt="Stack Details" width="700"/>
 </p>
 
 ---
@@ -135,7 +135,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ### 12. Configure Stack Options
 
 <p align="center">
-  <img src="images/configure-options.png" alt="Configure Stack Options" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/CONFIGURE%20STACK%20OPTIONS.png" alt="Configure Stack Options" width="700"/>
 </p>
 
 ---
@@ -143,7 +143,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ### 13. Review and Create Stack
 
 <p align="center">
-  <img src="images/review-create.png" alt="Review and Create" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/REVIEW%20AND%20CREATE.png" alt="Review and Create" width="700"/>
 </p>
 
 ---
@@ -151,7 +151,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ### 14. Stack Created Successfully
 
 <p align="center">
-  <img src="images/stack-complete.png" alt="Stack Created" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/CREATE%20COMPLETE.png" alt="Stack Created" width="700"/>
 </p>
 
 ---
@@ -159,7 +159,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ### 15. EC2 Search Page
 
 <p align="center">
-  <img src="images/ec2-search.png" alt="EC2 Search" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/Ec2%20search%20page.png" alt="EC2 Search" width="700"/>
 </p>
 
 ---
@@ -167,7 +167,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ### 16. EC2 Dashboard
 
 <p align="center">
-  <img src="images/ec2-dashboard.png" alt="EC2 Dashboard" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/EC2%20DASHBOARD.png" alt="EC2 Dashboard" width="700"/>
 </p>
 
 ---
@@ -175,7 +175,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ### 17. Linux Instance Running
 
 <p align="center">
-  <img src="images/linux-instance.png" alt="Linux Instance" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/LINUX%20INSTANCE%20RUNNING.png" alt="Linux Instance" width="700"/>
 </p>
 
 ---
@@ -183,7 +183,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ### 18. Linux Web Server Page
 
 <p align="center">
-  <img src="images/linux-webpage.png" alt="Linux Webpage" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/WEB%20SERVER%20PAGE%20WITH%20PUBLI%20IP(LINUX).png" alt="Linux Webpage" width="700"/>
 </p>
 
 ---
@@ -191,7 +191,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ### 19. Windows Instance Running
 
 <p align="center">
-  <img src="images/windows-instance.png" alt="Windows Instance" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/WINDOWS%20INSTANCE%20RUNNING.png" alt="Windows Instance" width="700"/>
 </p>
 
 ---
@@ -199,7 +199,7 @@ To build a single AWS CloudFormation Template (CFT) that:
 ### 20. Windows Web Server Page
 
 <p align="center">
-  <img src="images/windows-webpage.png" alt="Windows Webpage" width="700"/>
+  <img src="https://github.com/APARNA2109/aws-cft-webservers-project/blob/main/Day3-Dynamic-webservers/screenshots/WEB%20SERVER%20PAGE%20WITH%20PUBLI%20IP(WINDOWS).png" alt="Windows Webpage" width="700"/>
 </p>
 
 ---
